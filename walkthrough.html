@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Walkthroughs</title>
-  <link rel="stylesheet" href="styles.css">
   <style>
     body {
       margin: 0;
@@ -34,13 +33,13 @@
     }
 
     .playlist-card {
-      background: #1e293b;
-      border-radius: 10px;
+      position: relative;
       overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
       transform: scale(1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
     }
 
     .playlist-card:hover {
@@ -50,25 +49,23 @@
 
     .playlist-card img {
       width: 100%;
-      height: 200px;
+      height: 100%;
       object-fit: cover;
+      display: block;
     }
 
-    .playlist-card .details {
-      padding: 15px;
-      text-align: center;
-    }
-
-    .playlist-card .details h2 {
-      margin: 0;
+    .playlist-card h2 {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 5px 10px;
+      border-radius: 5px;
       font-size: 1.2rem;
-      color: #61dafb;
-    }
-
-    .playlist-card .details p {
-      margin: 10px 0 0;
-      font-size: 1rem;
-      color: #ddd;
+      text-align: center;
+      z-index: 10;
     }
   </style>
 </head>
@@ -83,19 +80,16 @@
     const playlists = [
       {
         title: "Walkthrough 1",
-        description: "Discover the best tips and tricks in this series.",
         link: "https://www.youtube.com/playlist?list=PLAYLIST_ID_1",
         thumbnail: "https://via.placeholder.com/300x200?text=Walkthrough+1"
       },
       {
         title: "Walkthrough 2",
-        description: "Level up your gameplay with advanced strategies.",
         link: "https://www.youtube.com/playlist?list=PLAYLIST_ID_2",
         thumbnail: "https://via.placeholder.com/300x200?text=Walkthrough+2"
       },
       {
         title: "Walkthrough 3",
-        description: "Master the art with this step-by-step guide.",
         link: "https://www.youtube.com/playlist?list=PLAYLIST_ID_3",
         thumbnail: "https://via.placeholder.com/300x200?text=Walkthrough+3"
       }
@@ -110,11 +104,8 @@
       card.classList.add("playlist-card");
 
       card.innerHTML = `
+        <h2>${playlist.title}</h2>
         <img src="${playlist.thumbnail}" alt="${playlist.title}">
-        <div class="details">
-          <h2>${playlist.title}</h2>
-          <p>${playlist.description}</p>
-        </div>
       `;
 
       playlistContainer.appendChild(card);
